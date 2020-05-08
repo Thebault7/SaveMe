@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Image numéro {{ photo.id }} {% endblock %}
+{% block titre %}Détail de la photo{% endblock %}
+{% block body %}
+    <div class="row" style="display: flex; flex-direction: row; margin-top: 20px; padding:30px">
+
+        <div class="col-sm-4 offset-sm-2">
+            <img src="{{ asset('assets/img/' ~ photo.titre) }}"  width="350"  alt="{{ photo.titre }}" style="margin-top: 20px; border-radius: 10px"/><br>
+        </div>
+        <div class="col-sm-4 offset-sm-2">
+            <div class="row" style="display: flex; flex-direction: column; margin-top: 50px;">
+                <p style="margin-top:20px"><b>{{ photo.nom }}</b></p>
+                {% if photo.description is not null %}
+                    <p>Description : {{ photo.description }}<br></p>
+                {% endif %}
+                <p>Date : {{ (photo.date | date('d/m/Y')) }}<br></p>
+                <p>Propriétaire :<i> {{ proprietaire.pseudo }}</i></p>
+                <p>Catégorie : {{ category.libelle }}</p>
+                <p>Lieu : {{ photo.lieu }}</p>
+
+                <div class="row" style="display: inline-block; margin: auto">
+                    {% if user.getUsername is defined %}
+                        {% if user.getUsername is same as (proprietaire.pseudo) %}
+                            <a class="btn btn-dark" style="margin-top: 30px" href="{{ path('photo_delete', {'id': photo.id}) }}" role="button">Supprimer cette image ?</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                <div class="row" style="display: inline-block; margin: auto">
+
+                    <a class="btn btn-dark" href="{{path('photo_geolocaliser', {'id': photo.id})}}" style="margin-top: 30px"role="button">Géolocalisation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

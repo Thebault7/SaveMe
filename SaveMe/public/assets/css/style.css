@@ -1,0 +1,24 @@
+a{
+    color: white;
+}
+
+a:hover{
+    color:#5eb5e0;
+}
+.jumbotron{
+
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+}
+
+#titre{
+    margin: auto;
+
+    font-weight: bold;
+}
+
+
+form{
+    margin-top: 50px;
+}

@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="row" style="display: flex; flex-direction: row; margin: auto">
+
+        {% for photo in photos %}
+            <div class="card" style="width: 13rem; margin: 20px">
+                <a href="{{ path('photo_detail', {'id': photo.id}) }}">
+                    <img src="{{ asset('assets/img/' ~photo.titre) }}" class="card-img-top"/>
+                </a>
+                <div class="card-body" style="margin: auto">
+                    <p class="card-text"><b>{{ photo.nom }}</b></p>
+                    <p class="card-text" >par <i> {{ photo.proprietaire.pseudo }}</i></p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="margin: auto">
+            {% for i in range(1, nbPage) %}
+                {% if page == i-1 %}
+                    <b><a href="{{ path('photo_all', {'page': i-1}) }}" style="color:black">{{ i }}</a></b>
+                {% else %}
+                    <a href="{{ path('photo_all', {'page': i-1}) }}" style="color:black">{{ i }}</a>
+                {% endif %}
+                {% if not loop.last %} {# si la loop n'est pas encore finie #}
+                    &nbsp;-&nbsp;
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+    Photos
+{% endblock %}
+
+{% block titre %}
+    Voici toutes nos photos
+{% endblock %}

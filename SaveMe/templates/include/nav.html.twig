@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+
+    <a href="{{ path('main_accueil') }}" class="nav-link">Accueil</a>
+    <a href="{{ path('photo_all') }}" class="nav-link">Toutes les photos</a>
+    {% if app.user %}
+        <a href="{{ path('photo_me') }}" class="nav-link">Mes photos</a>
+        <a href="{{ path('photo_add') }}" class="nav-link">Ajouter une photo</a>
+        <a href="{{ path('logout') }}" class="nav-link" >Déconnexion</a>
+        {% if app.user %}
+            <Je m'appelle {{ app.user.pseudo }}
+        {% endif %}
+    {% else %}
+        <a href="{{ path('app_register') }}" class="nav-link" >Nouveau compte</a>
+        <a href="{{ path('user_login') }}" class="nav-link">Connexion</a>
+    {% endif %}
+
+
+</nav>

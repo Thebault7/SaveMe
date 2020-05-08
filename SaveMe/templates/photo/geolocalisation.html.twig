@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+{% block titre %}Géolocalisation de la photo{% endblock %}
+{% block body %}
+    <div class="row" style="display: flex; flex-direction: column;">
+        <div style="margin: auto">
+            {% if latitude is same as (false) %}
+                <h1 style="margin-top:100px">Cette photo ne comporte pas de données de géolocalisation.</h1>
+            {% else %}
+                <h5 style="margin-bottom: 30px; margin-top: 30px">Géolocalisation de la photo : </h5>
+                <div style="margin-top: 30px">
+                    <iframe src="https://maps.google.com/maps?q={{ latitude }}, {{ longitude }}&z=15&output=embed"
+                            width="400" height="400" frameborder="0" style="border:0"></iframe>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

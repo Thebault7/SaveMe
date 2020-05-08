@@ -1,0 +1,55 @@
+{% extends 'layout.html.twig' %}
+{% block titre %}Se connecter{% endblock %}
+{% block body %}
+    {# app/Resources/views/security/login.html.twig #}
+    {# ... you will probably extend your base template, like base.html.twig #}
+    <div class="container" >
+       {% if error %}
+            <div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <form action="{{ path('user_login') }}" method="post" class="form-group"> <!--car on a mis le login dans checkpath de yaml-->
+            <div class="row" style="margin-top: 20px">
+
+                <div class="col-sm-3 offset-sm-1">
+                    <label for="username">Identifiant:</label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}"/>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px">
+                <div class="col-sm-3 offset-sm-1">
+                     <label for="password">Mot de passe:</label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="password" id="password"  class="form-control" name="_password"/>
+                </div>
+            </div>
+
+            {#
+                If you want to control the URL the user
+                is redirected to on success (more details below)
+
+            #}
+
+            <input type="hidden" name="_target_path" value="/"/>
+
+            <div class="row">
+                <div class="col-sm-3 offset-sm-1">
+                </div>
+                <div class="col-sm-7">
+            <button  type="submit" style="margin-top: 20px" class="btn btn-dark">Se connecter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}
+
+{% block title %}
+Connection
+{% endblock %}
+
+

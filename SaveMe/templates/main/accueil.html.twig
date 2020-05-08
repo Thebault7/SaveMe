@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Accueil
+{% endblock %}
+{% block titre %}Accueil{% endblock %}
+{% block body %}
+    {% if photos is not empty %}
+        <form method="GET" id="form_filtre" action="{{ path('category_filter', {'id': categories[0].id}) }}">
+            <div class="form-group row" >
+                <div class="col-sm-4">
+                    <label for="username">Filtrez selon la catégorie :</label>
+                </div>
+                <div class="col-sm-12">
+                    <select class="form-control form-control-lg"id="categorie" onchange="$('#form_filtre').attr('action', '{{ path('category_filter') }}/'+$('#categorie').val())">
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button value="Filtrer" type="submit" class="btn btn-dark btn-lg">Filtrer</button>
+        </form>
+        {% else %}
+            <div style="display:flex; flex-direction: row; margin-top: 30px">
+                <p style="margin: auto"><b>Soyez le premier à ajouter vos photos !</b> </p>
+            </div>
+    {% endif %}
+
+    <div class="row" style="display: flex; flex-direction: row; margin: auto">
+
+    {% for photo in photos %}
+        <div class="card" style="width: 13rem; margin: 20px">
+            <a href="{{ path('photo_detail', {'id': photo.id}) }}">
+                <img src="{{ asset('assets/img/' ~photo.titre) }}" class="card-img-top"/>
+            </a>
+            <div class="card-body" style="margin: auto">
+                <p class="card-text"><b>{{ photo.nom }}</b></p>
+                <p class="card-text" >par <i> {{ photo.proprietaire.pseudo }}</i></p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+    <a class="btn btn-dark btn-lg" href="{{ path('photo_all') }}" role="button">Voir plus de photos</a>
+{% endblock %}
+
+
+
